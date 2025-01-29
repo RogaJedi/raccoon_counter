@@ -40,6 +40,7 @@ dependencies:
   wakelock_plus: ^1.2.10
   flutter_screenutil: ^5.9.3
   smooth_corner: ^1.1.0
+  hold_down_button: ^1.1.0
 
 dev_dependencies:
   flutter_test:

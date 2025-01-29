@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../player.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../../player.dart';
 
 class PCV extends StatelessWidget {
   final Player player;

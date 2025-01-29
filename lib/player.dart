@@ -1,13 +1,25 @@
 import 'package:flutter/material.dart';
 
 class Player {
-  Color color;
-  int counter;
-  int id;
+  final String id;
+  final Color color;
+  final int counter;
 
   Player({
+    required this.id,
     required this.color,
     required this.counter,
-    required this.id
   });
+
+  Player copyWith({
+    String? id,
+    Color? color,
+    int? counter,
+  }) {
+    return Player(
+      id: id ?? this.id,
+      color: color ?? this.color,
+      counter: counter ?? this.counter,
+    );
+  }
 }

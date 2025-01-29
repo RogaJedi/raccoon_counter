@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:raccoon_counter/layouts/2P_A.dart';
+import 'package:raccoon_counter/player_SM/player_cubit.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
 void main() {
@@ -12,7 +14,14 @@ void main() {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]).then((_) {
-    runApp(const MyApp());
+    runApp(
+      MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => PlayerCubit()),
+          ],
+          child: const MyApp(),
+      ),
+    );
   });
 }
 
