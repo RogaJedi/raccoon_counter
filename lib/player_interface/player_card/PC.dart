@@ -32,16 +32,32 @@ class PC extends StatelessWidget {
             Transform.rotate(
               angle: 90 * 3.14159 / 180,
               child: SizedBox(
-                width: 200.h,
+                width: 300.h,
                 height: 200.h,
                 child: Center(
-                  child: Text(
-                    player.counter.toString(),
-                    style: TextStyle(
-                      fontSize: 110.sp,
-                      color: Colors.white,
-                    ),
-                  ),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      Text(
+                        '${player.counter}',
+                        style: TextStyle(
+                          fontSize: 110.sp,
+                          color: Colors.white,
+                        ),
+                      ),
+                      if (player.pendingIndicator != null)
+                        Positioned(
+                          top: -10, // Adjust position as needed
+                          child: Text(
+                            '${player.pendingIndicator! > 0 ? '+' : ''}${player.pendingIndicator}',
+                            style: TextStyle(
+                              fontSize: 30.sp,
+                              color: Colors.white70,
+                            ),
+                          ),
+                        ),
+                    ],
+                  )
                 ),
               ),
             ),
@@ -62,3 +78,13 @@ class PC extends StatelessWidget {
 
   }
 }
+
+/*
+Text(
+                    player.counter.toString(),
+                    style: TextStyle(
+                      fontSize: 110.sp,
+                      color: Colors.white,
+                    ),
+                  ),
+ */
