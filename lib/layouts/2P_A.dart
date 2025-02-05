@@ -16,10 +16,10 @@ class TWOPA extends StatelessWidget {
     required this.aspectRatio,
   });
 
-  final List<String> displayedPlayerIds = ['1', '4'];
+  final List<String> displayedPlayerIds = ['1', '2'];
   final Map<String, int> rotations = {
     '1': 1, // for player 1, rotate 4 quarter turns
-    '4': 3, // for player 4, rotate 2 quarter turns
+    '2': 3, // for player 4, rotate 2 quarter turns
   };
 
 

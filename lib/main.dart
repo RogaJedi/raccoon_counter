@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:raccoon_counter/interface_SM/player_interface_cubit.dart';
 import 'package:raccoon_counter/layouts/2P_A.dart';
 import 'package:raccoon_counter/player_SM/player_cubit.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
@@ -18,6 +19,7 @@ void main() {
       MultiBlocProvider(
           providers: [
             BlocProvider(create: (context) => PlayerCubit()),
+            BlocProvider(create: (context) => PlayerInterfaceCubit()),
           ],
           child: const MyApp(),
       ),

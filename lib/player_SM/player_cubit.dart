@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:raccoon_counter/player_SM/player_state.dart';
 
@@ -47,8 +48,28 @@ class PlayerCubit extends Cubit<PlayerState> {
       );
       emit(state.copyWith(players: currentPlayers));
 
-      // Clear the indicator after delay
       _startDebounceTimer(playerId);
+    }
+  }
+
+  void changeColor(String playerId, Color color) {
+    final currentPlayers = Map<String, Player>.from(state.players);
+    if (currentPlayers.containsKey(playerId)) {
+      currentPlayers[playerId] = currentPlayers[playerId]!.copyWith(
+        color: color,
+        selectedColor: color, // Update both color and selectedColor
+      );
+      emit(state.copyWith(players: currentPlayers));
+    }
+  }
+
+  void changeSelectedColor(String playerId, Color color) {
+    final currentPlayers = Map<String, Player>.from(state.players);
+    if (currentPlayers.containsKey(playerId)) {
+      currentPlayers[playerId] = currentPlayers[playerId]!.copyWith(
+        selectedColor: color,
+      );
+      emit(state.copyWith(players: currentPlayers));
     }
   }
 
