@@ -15,21 +15,22 @@ class ColorTemplate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SmoothContainer(
-        height: 75.h,
-        width: 60.w,
-        smoothness: 0.6, // Adjust this value to control the smoothness (0.0 to 1.0)
-        color: Colors.transparent, // Set the background color if needed
-        side: BorderSide(color: borderColor, width: 2),
-        borderRadius: BorderRadius.circular(14),
+    return SmoothContainer(
+      width: 74.w,
+      height: 64.h,
+      smoothness: 0.6, // Adjust this value to control the smoothness (0.0 to 1.0)
+      color: Colors.transparent, // Set the background color if needed
+      side: BorderSide(color: borderColor, width: 2),
+      borderRadius: BorderRadius.circular(11),
+      child: Padding(
+        padding: EdgeInsets.all(4),
         child: Center(
           child: SmoothContainer(
-            height: 65.h,
-            width: 50.w,
+            width: 65.33.w,
+            height: 55.h,
             smoothness: 0.6,
             color: mainColor,
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(8),
           ),
         ),
       ),

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:raccoon_counter/interface_SM/player_interface_cubit.dart';
 import 'package:raccoon_counter/player_interface/options/color/color_dialog_V.dart';
 
 import '../../player.dart';

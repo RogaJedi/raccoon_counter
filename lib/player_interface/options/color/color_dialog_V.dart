@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:raccoon_counter/player.dart';
 import 'package:raccoon_counter/player_SM/player_state.dart';
 import 'package:raccoon_counter/player_interface/options/color/color_template.dart';
+import 'package:smooth_corner/smooth_corner.dart';
 
 import '../../../player_SM/player_cubit.dart';
 
@@ -47,39 +49,51 @@ class ColorDialogV extends StatelessWidget {
       turn = 180;
     }
 
-    Color playerColor = player.color;
+    return BlocBuilder<PlayerCubit, PlayerState>(
+        builder: (context, state) {
+          final currentPlayer = state.players[player.id];
 
-    void changeColor(Color newColor) {
-      playerColor = newColor;
-    }
-
-    return Transform.rotate(
-      angle: 0 * 3.14159 / 180,
-      child: BlocBuilder<PlayerCubit, PlayerState>(
-          builder: (context, state) {
-            final currentPlayer = state.players[player.id];
-
-            return AlertDialog(
-              backgroundColor: Color(0xFF353535),
-              content: SizedBox(
-                width: double.maxFinite,
+          return AlertDialog(
+            backgroundColor: Color(0xFF1E1E1E),
+            title: Text(
+                "Pick a color",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 35.sp,
+              ),
+            ),
+            content: SmoothContainer(
+              width: 300.w,
+              height: 469.h,
+              smoothness: 0.6,
+              borderRadius: BorderRadius.circular(20),
+              child: SmoothContainer(
+                color: Color(0xff353535),
+                width: 252.w,
+                height: 292.h,
+                smoothness: 0.6,
+                borderRadius: BorderRadius.circular(15),
                 child: SingleChildScrollView(
                   child: GridView.count(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     crossAxisCount: 3,
+                    crossAxisSpacing: 11,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16.w,
+                      vertical: 8.h,
+                    ),
                     children: [
-                      for (int i = 0; i < 18; i++)
-                        Transform.rotate(
-                          angle: 90 * 3.14159 / 180,
+                      for (Color color in colors)
+                        Center(
                           child: GestureDetector(
                             onTap: () {
-                              context.read<PlayerCubit>().changeSelectedColor(player.id, colors[i]);
+                              context.read<PlayerCubit>().changeSelectedColor(player.id, color);
                             },
                             child: ColorTemplate(
-                              mainColor: colors[i],
-                              borderColor: colors[i] == currentPlayer?.selectedColor
-                                  ? colors[i]  // or any other color to indicate selection
+                              mainColor: color,
+                              borderColor: color == currentPlayer?.selectedColor
+                                  ? color
                                   : Color(0xFF353535),
                             ),
                           ),
@@ -88,35 +102,35 @@ class ColorDialogV extends StatelessWidget {
                   ),
                 ),
               ),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    if (currentPlayer != null) {
-                      context.read<PlayerCubit>().changeColor(
-                          player.id,
-                          currentPlayer.selectedColor
-                      );
-                    }
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text('Select'),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    if (currentPlayer != null) {
-                      context.read<PlayerCubit>().changeSelectedColor(
-                          player.id,
-                          currentPlayer.color
-                      );
-                    }
-                  },
-                  child: const Text('Back'),
-                ),
-              ],
-            );
-          }
-      ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  if (currentPlayer != null) {
+                    context.read<PlayerCubit>().changeColor(
+                        player.id,
+                        currentPlayer.selectedColor
+                    );
+                  }
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Select'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  if (currentPlayer != null) {
+                    context.read<PlayerCubit>().changeSelectedColor(
+                        player.id,
+                        currentPlayer.color
+                    );
+                  }
+                },
+                child: const Text('Back'),
+              ),
+            ],
+          );
+        }
     );
   }
 }
